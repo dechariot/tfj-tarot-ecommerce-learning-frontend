@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Layout from "../core/Layout";
-import {signup} from "../auth";
+import { signup } from "../auth";
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -19,6 +20,7 @@ const Signup = () => {
 
   const clickSubmit = (event) => {
     event.preventDefault();
+    setValues({ ...values, error: false });
     signup({ name, email, password }).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error, success: false });
@@ -86,7 +88,8 @@ const Signup = () => {
       className="alert alert-info"
       style={{ display: success ? "" : "none" }}
     >
-      New account is created successfully. Please sign in.
+      New account is created successfully. Please Please{" "}
+      <Link to="/signin">Signin</Link>
     </div>
   );
 
@@ -99,7 +102,6 @@ const Signup = () => {
       {showSuccess()}
       {showError()}
       {signUpForm()}
-      {JSON.stringify(values)}
     </Layout>
   );
 };
