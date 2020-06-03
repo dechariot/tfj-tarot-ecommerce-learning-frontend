@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { isAuthenticated } from "../auth/index";
 import { Link } from "react-router-dom";
-import { getProducts, getBraintreeClientToken } from "./apiCore";
+import {
+  getProducts,
+  getBraintreeClientToken,
+  processPayment,
+} from "./apiCore";
+import { emptyCart } from "./cartHelpers";
 import DropIn from "braintree-web-drop-in-react";
 
 const CheckCount = ({ products }) => {
@@ -57,15 +62,32 @@ const CheckCount = ({ products }) => {
     let getNonce = data.instance
       .requestPaymentMethod()
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         nonce = data.nonce;
         // once you have nonce (card type, card number) send nonce as 'paymentMethodNonce'
         // and also total to be charged
-        console.log(
-          "send nonce and total to process: ",
-          nonce,
-          getTotal(products)
-        );
+        // console.log(
+        //     "send nonce and total to process: ",
+        //     nonce,
+        //     getTotal(products)
+        // );
+        const paymentData = {
+          paymentMethodNonce: nonce,
+          amount: getTotal(products),
+        };
+
+        processPayment(userId, token, paymentData)
+          .then((response) => {
+            // console.log(response);
+            setData({ ...data, success: response.success });
+            //emptyCart
+            emptyCart(() => {
+              // run useEffect in parent Cart
+              console.log("payment success and empty cart");
+            });
+            //create order
+          })
+          .catch((err) => console.log(err));
       })
       .catch((error) => {
         console.log("dropin error: ", error);
@@ -74,12 +96,15 @@ const CheckCount = ({ products }) => {
   };
 
   const showDropIn = () => (
-    <div  onBlur={() => setData({ ...data, error: '' })}>
+    <div onBlur={() => setData({ ...data, error: "" })}>
       {data.clientToken !== null && products.length > 0 ? (
         <div>
           <DropIn
-            options={{
-              authorization: data.clientToken,
+             options={{
+                authorization: data.clientToken,
+                paypal: {
+                    flow: 'vault'
+                }
             }}
             onInstance={(instance) => (data.instance = instance)}
           />
@@ -91,15 +116,27 @@ const CheckCount = ({ products }) => {
     </div>
   );
 
-  const showError = error => (
-    <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
-        {error}
+  const showError = (error) => (
+    <div
+      className="alert alert-danger"
+      style={{ display: error ? "" : "none" }}
+    >
+      {error}
     </div>
-);
+  );
+  const showSuccess = (success) => (
+    <div
+      className="alert alert-info"
+      style={{ display: success ? "" : "none" }}
+    >
+      Thanks! Your payment was successful!
+    </div>
+  );
 
   return (
     <div>
       <h2>Total: ${getTotal()}</h2>
+      {showSuccess(data.success)}
       {showError(data.error)}
       {showCheckout()}
     </div>
