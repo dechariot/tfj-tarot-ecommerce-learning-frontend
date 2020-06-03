@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
-import { createProduct } from "../admin/apiAdmin";
-
+import { createProduct, getCategories } from "../admin/apiAdmin";
 
 const AddProduct = () => {
   const [values, setValues] = useState({
@@ -42,8 +41,19 @@ const AddProduct = () => {
 
   const { user, token } = isAuthenticated();
 
+  //load categories and set form data
+  const init = () => {
+    getCategories().then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({ ...values, categories: data, formData: new FormData() });
+      }
+    });
+  };
+
   useEffect(() => {
-    setValues({ ...values, formData: new FormData() });
+    init();
   }, []);
 
   const handleChange = (name) => (event) => {
@@ -72,11 +82,9 @@ const AddProduct = () => {
           createdProduct: data.name,
         });
       }
-    console.log(data)
+      console.log(data);
     });
   };
-
-
 
   const newPostForm = () => (
     <form className="mb-3" onSubmit={clickSubmit}>
@@ -134,14 +142,20 @@ const AddProduct = () => {
       <div className="form-group">
         <label className="text-muted">Category</label>
         <select onChange={handleChange("category")} className="form-control">
-          <option value="5ece98d491dcf505906b85ea">Tarot Cards</option>
-          <option value="5ed007bc25bf6b0fb4b1fc8f">Tarot Books</option>
+          <option>Please select a category</option>
+          {categories &&
+            categories.map((c, i) => (
+              <option key={i} value={c._id}>
+                {c.name}
+              </option>
+            ))}
         </select>
       </div>
 
       <div className="form-group">
         <label className="text-muted">Shipping</label>
         <select onChange={handleChange("shipping")} className="form-control">
+          <option>Please select a category</option>
           <option value="0">No Shipping</option>
           <option value="1">Shipping Available</option>
         </select>
@@ -157,7 +171,7 @@ const AddProduct = () => {
         />
       </div>
 
-      <button className="btn btn-outline-primary">Create Product</button>
+      <button className="btn btn-primary">Create Product</button>
     </form>
   );
 
@@ -175,14 +189,22 @@ const AddProduct = () => {
       className="alert alert-info"
       style={{ display: createdProduct ? "" : "none" }}
     >
-      <h2>{`${createdProduct}`} is created!</h2>
+      <h2>Product is successfully created!</h2>
     </div>
   );
 
   const showLoading = () =>
     loading && (
       <div className="alert alert-success">
-        <h2>Loading...</h2>
+        <p>Loading...</p>
+      </div>
+    );
+
+    const goBack = () => (
+      <div>
+        <Link to="/admin/dashboard" className="text-secondary">
+          Back to Dashboard
+        </Link>
       </div>
     );
 
@@ -193,11 +215,12 @@ const AddProduct = () => {
       className="container"
     >
       <div className="row">
-        <div className="col-md-8 offset-md-2">
+        <div className="col-md-8 offset-md-2 mb-5">
           {showLoading()}
           {showSuccess()}
           {showError()}
           {newPostForm()}
+          {goBack()}
         </div>
       </div>
     </Layout>
