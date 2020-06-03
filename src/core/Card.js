@@ -9,6 +9,7 @@ const Card = ({ product }) => {
         <div className="card-header">{product.name}</div>
         <div className="card-body">
           <ShowImage item={product} url="product" />
+          <p>{product.description.substring(0,50)}</p>
           <p>${product.price}</p>
           <div className="row">
             <div className="col-6">
