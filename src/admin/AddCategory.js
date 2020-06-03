@@ -51,7 +51,7 @@ const AddCategory = () => {
 
   const showSuccess = () => {
     if (success) {
-      return <h3 className="text-success">{name} is successfully created</h3>;
+      return <h3 className="text-success">Category is successfully created</h3>;
     }
   };
 
