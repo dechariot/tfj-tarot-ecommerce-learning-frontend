@@ -13,14 +13,14 @@ const Card = ({ product }) => {
           <div className="row">
             <div className="col-6">
               <Link to="/">
-                <button className="btn btn-primary mt-2 mb-2">
+                <button className="btn btn-primary mt-2 mb-2 mr-2">
                   View Product
                 </button>
               </Link>
             </div>
             <div className="col-6">
               <Link to="/">
-                <button className="btn btn-warning mt-2 mb-2">
+                <button className="btn btn-warning mt-2 mb-2 ">
                   Add to Cart
                 </button>
               </Link>
