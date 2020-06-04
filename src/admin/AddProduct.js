@@ -215,7 +215,7 @@ const AddProduct = () => {
       className="container"
     >
       <div className="row">
-        <div className="col-md-8 offset-md-2 mb-5">
+        <div className="col-md-8 offset-md-2 mb-2">
           {showLoading()}
           {showSuccess()}
           {showError()}
