@@ -5,6 +5,7 @@ import {
   getProducts,
   getBraintreeClientToken,
   processPayment,
+  createOrder,
 } from "./apiCore";
 import { emptyCart } from "./cartHelpers";
 import DropIn from "braintree-web-drop-in-react";
@@ -37,6 +38,10 @@ const CheckCount = ({ products }) => {
   useEffect(() => {
     getToken(userId, token);
   }, []);
+
+  const handleAddress = (event) => {
+    setData({ ...data, address: event.target.value });
+  };
 
   const getTotal = () => {
     return products.reduce((currentValue, nextValue) => {
@@ -76,18 +81,35 @@ const CheckCount = ({ products }) => {
           amount: getTotal(products),
         };
 
-        processPayment(userId, token, paymentData)
-          .then((response) => {
-            // console.log(response);
-            setData({ ...data, success: response.success });
-            //emptyCart
-            emptyCart(() => {
-              // run useEffect in parent Cart
-              console.log("payment success and empty cart");
+        processPayment(userId, token, paymentData).then((response) => {
+          console.log(response);
+          //emptyCart
+          //create order
+
+          const createOrderData = {
+            products: products,
+            transaction_id: response.transaction_id,
+            amount: response.transaction.amount,
+            address: deliveryAddress,
+          };
+
+          createOrder(userId, token, createOrderData)
+            .then((response) => {
+              emptyCart(() => {
+                // setRun(!run); // run useEffect in parent Cart
+                console.log("payment success and empty cart");
+                setData({
+                  loading: false,
+                  success: true,
+                });
+                window.location.reload(true)
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+              setData({ loading: false });
             });
-            //create order
-          })
-          .catch((err) => console.log(err));
+        });
       })
       .catch((error) => {
         console.log("dropin error: ", error);
@@ -99,12 +121,21 @@ const CheckCount = ({ products }) => {
     <div onBlur={() => setData({ ...data, error: "" })}>
       {data.clientToken !== null && products.length > 0 ? (
         <div>
+          <div className="form-group mb-3">
+            <label className="text-muted">Delivery address:</label>
+            <textarea
+              onChange={handleAddress}
+              className="form-control"
+              value={data.address}
+              placeholder="Type your delivery address here..."
+            />
+          </div>
           <DropIn
-             options={{
-                authorization: data.clientToken,
-                paypal: {
-                    flow: 'vault'
-                }
+            options={{
+              authorization: data.clientToken,
+              paypal: {
+                flow: "vault",
+              },
             }}
             onInstance={(instance) => (data.instance = instance)}
           />
