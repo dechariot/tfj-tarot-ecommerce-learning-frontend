@@ -10,27 +10,32 @@ const AdminDashboard = () => {
 
   const adminLinks = () => {
     return (
-      <div className="card mb-5">
-        <h4 className="card-header">Admin Panel</h4>
-        <ul className="list-group">
+      <div className="card mb-5" style={{border:'4px solid  rgb(88, 4, 255)'}}>
+        <h4 className="card-header text-white rounded-0 mainColor" style={{border:"none"}}>Admin Panel</h4>
+        <ul className="list-group rounded-0">
           <li className="list-group-item">
-            <Link className="nav-link" to="/create/category">
+            <Link className="nav-link mainText font-weight-bold" to="/create/category">
               Create Category
             </Link>
           </li>
           <li className="list-group-item">
-            <Link className="nav-link" to="/create/product">
+            <Link className="nav-link mainText font-weight-bold" to="/create/product">
               Create Product
             </Link>
           </li>
           <li className="list-group-item">
-            <Link className="nav-link" to="/admin/orders">
+            <Link className="nav-link mainText font-weight-bold" to="/admin/orders">
               View Orders
             </Link>
           </li>
           <li className="list-group-item">
-            <Link className="nav-link" to="/admin/products">
+            <Link className="nav-link mainText font-weight-bold" to="/admin/products">
               Manage Products
+            </Link>
+          </li>
+          <li className="list-group-item">
+            <Link className="nav-link mainText font-weight-bold" to={`/profile/${_id}`}>
+              Edit Profile
             </Link>
           </li>
         </ul>
@@ -39,11 +44,11 @@ const AdminDashboard = () => {
   };
 
   const adminInfo = () => (
-    <div className="card mb-5">
-      <h3 className="card-header">Admin Information</h3>
-      <ul className="list-group">
-        <li className="list-group-item">{name}</li>
-        <li className="list-group-item">{email}</li>
+    <div className="card mb-5"style={{border:'4px solid  rgb(88, 4, 255)'}}>
+      <h3 className="card-header text-white rounded-0 mainColor font-weight-bold">Admin Information</h3>
+      <ul className="list-group rounded-0">
+        <li className="list-group-item font-weight-bold mainText">{name}</li>
+        <li className="list-group-item font-weight-bold mainText">{email}</li>
       </ul>
     </div>
   );
@@ -55,8 +60,8 @@ const AdminDashboard = () => {
       className="container"
     >
       <div className="row">
-        <div className="col-3">{adminLinks()}</div>
-        <div className="col-9">{adminInfo()}</div>
+        <div className="col-4">{adminLinks()}</div>
+        <div className="col-8">{adminInfo()}</div>
       </div>
     </Layout>
   );

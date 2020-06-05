@@ -59,7 +59,7 @@ const Shop = () => {
     return (
       size > 0 &&
       size >= limit && (
-        <button onClick={loadMore} className="btn btn-warning mb-5">
+        <button onClick={loadMore} className="btn btn-dark mb-5 text-white mainColor rounded-lg font-weight-bold" style={{border:"none",fontSize:"1.2rem"}}>
           Load more
         </button>
       )
@@ -101,38 +101,41 @@ const Shop = () => {
     <Layout
       title="Shop Page"
       description="Search and find your stuff"
-      className="container"
+      className="container-fluid"
     >
       <div className="row">
-        <div className="col-4">
-          <h4>Filter by category</h4>
-          <ul>
+        <div className="col-md-3 col-sm-12 mb-5">
+          <h4 className="font-weight-bold mainText">Filter by category</h4>
+          <ul className="pt-2 pb-2 mainColor rounded font-weight-bold">
             <CheckBox
               categories={categories}
               handleFilters={(filters) => handleFilters(filters, "category")}
             />
           </ul>
-          <hr></hr>
-          <h4>Filter by prices</h4>
-          <ul className="list-group">
+          <hr className="mainColor"></hr>
+          <h4 className="font-weight-bold mainText" >Filter by prices</h4>
+          <ul className="list-group mainColor p-2 font-weight-bold">
             <RadioBox
               prices={prices}
               handleFilters={(filters) => handleFilters(filters, "price")}
             />
           </ul>
         </div>
-        <div className="col-8">
-          <h2 className="mb-4">Products</h2>
+        <div className="col-9">
+          <h2 className="mb-4 mainText font-weight-bold">PRODUCTS</h2>
           <div className="row">
             {filteredResults.map((product, i) => (
-              <div className="col-4 mb-3">
+              <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
                 
                 <Card key={i} product={product} />
               </div>
             ))}
           </div>
           <hr></hr>
+          <div style={{display:"flex",justifyContent:"center"}}>
           {loadMoreButton()}
+          </div>
+          
         </div>
       </div>
     </Layout>

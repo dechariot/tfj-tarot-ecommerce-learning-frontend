@@ -76,12 +76,12 @@ const Search = () => {
   };
 
   const searchForm = () => (
-    <form onSubmit={searchSubmit}>
-      <span className="input-group-text">
+    <form onSubmit={searchSubmit} className="bg-white">
+      <span className="input-group-text mainColor" style={{borderRadius:"30px"}} >
         <div className="input-group input-group-lg">
           <div className="input-group-prepend">
-            <select className="btn mr-2" onChange={handleChange("category")}>
-              <option value="ALL">Pick Category</option>
+            <select className="btn mr-2 font-weight-bold text-white mainColor" style={{borderRadius:"30px"}} onChange={handleChange("category")}>
+              <option  value="ALL">Pick Category</option>
               {categories.map((c, i) => (
                 <option key={i} value={c._id}>
                   {c.name}
@@ -92,12 +92,13 @@ const Search = () => {
           <input
             type="search"
             className="form-control"
-            placeholder="Search"
+            style={{borderRadius:"30px",border:"none"}}
+            placeholder=""
             onChange={handleChange("search")}
           />
         </div>
-        <div className="btn input-group-append" style={{ border: "none" }}>
-          <button className="input-group-text ">Search</button>
+        <div className="btn input-group-append">
+          <button className="input-group-text mainColor font-weight-bold" style={{border:"none",fontSize:"1.2em"}}>Search</button>
         </div>
       </span>
     </form>

@@ -87,21 +87,22 @@ const AddProduct = () => {
   };
 
   const newPostForm = () => (
-    <form className="mb-3" onSubmit={clickSubmit}>
+    <form className="mb-3 text-light font-weight-bold" onSubmit={clickSubmit}>
       <h4>Photo Upload</h4>
       <div className="form-group">
-        <label className="btn btn-secondary">
+        <label className="btn btn-light rounded-pill mt-2" style={{width:"100%"}}>
           <input
             onChange={handleChange("photo")}
             type="file"
             name="photo"
             accept="image/*"
+            
           />
         </label>
       </div>
 
       <div className="form-group">
-        <label className="text-muted">Name</label>
+        <label className="text-light font-weight-bold">Name</label>
         <input
           onChange={handleChange("name")}
           type="text"
@@ -111,7 +112,7 @@ const AddProduct = () => {
       </div>
 
       <div className="form-group">
-        <label className="text-muted">Description</label>
+        <label className="text-light font-weight-bold">Description</label>
         <textarea
           onChange={handleChange("description")}
           className="form-control"
@@ -120,7 +121,7 @@ const AddProduct = () => {
       </div>
 
       <div className="form-group">
-        <label className="text-muted">Producer</label>
+        <label className="text-light font-weight-bold">Producer</label>
         <input
           onChange={handleChange("producer")}
           type="text"
@@ -130,7 +131,7 @@ const AddProduct = () => {
       </div>
 
       <div className="form-group">
-        <label className="text-muted">Price</label>
+        <label className="text-light font-weight-bold">Price</label>
         <input
           onChange={handleChange("price")}
           type="number"
@@ -140,7 +141,7 @@ const AddProduct = () => {
       </div>
 
       <div className="form-group">
-        <label className="text-muted">Category</label>
+        <label className="text-light font-weight-bold">Category</label>
         <select onChange={handleChange("category")} className="form-control">
           <option>Please select a category</option>
           {categories &&
@@ -153,7 +154,7 @@ const AddProduct = () => {
       </div>
 
       <div className="form-group">
-        <label className="text-muted">Shipping</label>
+        <label className="text-light font-weight-bold">Shipping</label>
         <select onChange={handleChange("shipping")} className="form-control">
           <option>Please select a category</option>
           <option value="0">No Shipping</option>
@@ -162,7 +163,7 @@ const AddProduct = () => {
       </div>
 
       <div className="form-group">
-        <label className="text-muted">Quantity</label>
+        <label className="text-light font-weight-bold">Quantity</label>
         <input
           onChange={handleChange("quantity")}
           type="number"
@@ -171,7 +172,7 @@ const AddProduct = () => {
         />
       </div>
 
-      <button className="btn btn-primary">Create Product</button>
+      <button className="btn btn-light mainText font-weight-bold rounded-pill mt-1 ">Create Product</button>
     </form>
   );
 
@@ -202,7 +203,7 @@ const AddProduct = () => {
 
     const goBack = () => (
       <div>
-        <Link to="/admin/dashboard" className="text-secondary">
+        <Link to="/admin/dashboard" className="text-white">
           Back to Dashboard
         </Link>
       </div>
@@ -215,7 +216,7 @@ const AddProduct = () => {
       className="container"
     >
       <div className="row">
-        <div className="col-md-8 offset-md-2 mb-2">
+        <div className="col-md-8 offset-md-2 mb-2 mainColor p-5" style={{borderRadius:"30px"}}>
           {showLoading()}
           {showSuccess()}
           {showError()}

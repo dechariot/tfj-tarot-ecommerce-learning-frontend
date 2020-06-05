@@ -43,10 +43,10 @@ const Home = () => {
     >
       <Search />
 
-      <h2 className="mb-4">Bestselling</h2>
+      <h2 className="mainText display-5 mb-4" >BEST SELLING</h2>
       <div className="row">
         {productsBySell.map((product, i) => (
-          <div className="col-4 mb-3">
+          <div className="col-lg-4 col-md-6 col-sm-12 mb-4">
             <Card key={i} product={product} />
           </div>
         ))}
@@ -54,10 +54,10 @@ const Home = () => {
 
       <hr></hr>
 
-      <h2 className="mb-4">LastArrival</h2>
+      <h2 className="mainText display-5 mb-4">LAST ARRIVAL</h2>
       <div className="row">
         {productsByArrival.map((product, i) => (
-          <div className="col-4 mb-3">
+          <div className="col-lg-4 col-md-6 col-sm-12 mb-4">
             <Card key={i} product={product} />
           </div>
         ))}

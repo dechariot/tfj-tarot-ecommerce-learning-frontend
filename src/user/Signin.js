@@ -39,7 +39,8 @@ const Signin = () => {
   const signInForm = () => (
     <form>
       <div className="form-group">
-        <label className="text-muted">Email</label>
+        <h3 className="text-center font-weight-bold mainText"> Login </h3>
+        <label className="mainText font-weight-bold">Email</label>
         <input
           onChange={handleChange("email")}
           className="form-control"
@@ -49,7 +50,7 @@ const Signin = () => {
       </div>
 
       <div className="form-group">
-        <label className="text-muted">Password</label>
+        <label className="mainText font-weight-bold">Password</label>
         <input
           onChange={handleChange("password")}
           className="form-control"
@@ -57,9 +58,15 @@ const Signin = () => {
           value={password}
         />
       </div>
-      <button onClick={clickSubmit} className="btn btn-danger">
+      <div style={{display:"flex",justifyContent:"center"}}>
+      <button
+        onClick={clickSubmit}
+        className="btn bt-success mainColor rounded-pill font-weight-bold"
+      >
         Sign In
       </button>
+      </div>
+      
     </form>
   );
 
@@ -87,8 +94,8 @@ const Signin = () => {
         return <Redirect to="/user/dashboard/" />;
       }
     }
-    if(isAuthenticated()) {
-        return <Redirect to="/" />
+    if (isAuthenticated()) {
+      return <Redirect to="/" />;
     }
   };
 

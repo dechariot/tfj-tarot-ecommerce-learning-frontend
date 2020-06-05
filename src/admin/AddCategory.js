@@ -35,7 +35,7 @@ const AddCategory = () => {
   const newCategoryForm = () => (
     <form onSubmit={clickSubmit}>
       <div className="form-group">
-        <label className="text-muted">Category Name</label>
+        <label className="mainText font-weight-bold " style={{fontSize:"1.5rem"}}>Category Name</label>
         <input
           type="text"
           className="form-control"
@@ -45,7 +45,7 @@ const AddCategory = () => {
           required
         />
       </div>
-      <button className="btn btn-primary">Create Category</button>
+      <button className="btn btn-dark rounded-pill mainColor font-weight-bold mb-3" style={{border:"none",}}>Create Category</button>
     </form>
   );
 

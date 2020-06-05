@@ -10,8 +10,9 @@ const Layout = ({
 }) => (
   <div>
     <Menu/>
-    <div className="jumbotron">
-      <h2>{title}</h2>
+    <div className="mainColor p-4 mb-4">
+      
+      <h2 className="display-3 font-weight-bold">{title}</h2>
       <p className="lead">{description}</p>
     </div>
     <div className={className}>{children}</div>

@@ -5,15 +5,15 @@ import { itemTotal } from "./cartHelpers";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
-    return { color: "#ff9900" };
+    return { fontSize:"1.2rem" , color: "#ffffff", fontWeight:"bold",cursor:"pointer" };
   } else {
-    return { color: "#ffffff" };
+    return { fontSize:"1.2rem", color: "#ffffff",cursor:"pointer" };
   }
 };
 
 const Menu = ({ history }) => (
   <div>
-    <ul className="nav nav-tabs bg-primary">
+    <ul className="nav mainColor p-2">
       <li className="nav-item">
         <Link className="nav-link " style={isActive(history, "/")} to="/">
           Home

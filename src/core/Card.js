@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import ShowImage from './ShowImage';
-import moment from 'moment';
-import { addItem, updateItem, removeItem } from './cartHelpers';
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import ShowImage from "./ShowImage";
+import moment from "moment";
+import { addItem, updateItem, removeItem } from "./cartHelpers";
 
 const Card = ({
   product,
@@ -10,18 +10,20 @@ const Card = ({
   showAddToCartButton = true,
   cartUpdate = false,
   showRemoveProductButton = false,
-  setRun = f => f,
-  run = undefined
+  setRun = (f) => f,
+  run = undefined,
   // changeCartSize
 }) => {
   const [redirect, setRedirect] = useState(false);
   const [count, setCount] = useState(product.count);
 
-  const showViewButton = showViewProductButton => {
+  const showViewButton = (showViewProductButton) => {
     return (
       showViewProductButton && (
         <Link to={`/product/${product._id}`} className="mr-2">
-          <button className="btn btn-outline-primary mt-2 mb-2 card-btn-1">View Product</button>
+          <button className="btn btn-dark mainColor font-weight-bold mt-2 mb-2 card-btn-1 rounded-lg p-2" style={{border:"none" ,width:'100%'}}>
+            View Product
+          </button>
         </Link>
       )
     );
@@ -31,31 +33,34 @@ const Card = ({
     addItem(product, setRedirect(true));
   };
 
-  const shouldRedirect = redirect => {
+  const shouldRedirect = (redirect) => {
     if (redirect) {
       return <Redirect to="/cart" />;
     }
   };
 
-  const showAddToCartBtn = showAddToCartButton => {
+  const showAddToCartBtn = (showAddToCartButton) => {
     return (
       showAddToCartButton && (
-        <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2 card-btn-1  ">
-          Add to cart
+        <button
+          onClick={addToCart}
+          className="btn btn-dark mainColor p-2 font-weight-bold rounded-lg mt-2 mb-2" style={{border:"none" ,width:"100%"}}
+        >
+          Add to Card
         </button>
       )
     );
   };
 
-  const showStock = quantity => {
+  const showStock = (quantity) => {
     return quantity > 0 ? (
-      <span className="badge badge-primary badge-pill">In Stock </span>
+      <span className="badge  mainColor mb-2">In Stock </span>
     ) : (
-      <span className="badge badge-primary badge-pill">Out of Stock </span>
+      <span className="badge  mb-2">Out of Stock </span>
     );
   };
 
-  const handleChange = productId => event => {
+  const handleChange = (productId) => (event) => {
     setRun(!run); // run useEffect in parent Cart
     setCount(event.target.value < 1 ? 1 : event.target.value);
     if (event.target.value >= 1) {
@@ -63,7 +68,7 @@ const Card = ({
     }
   };
 
-  const showCartUpdateOptions = cartUpdate => {
+  const showCartUpdateOptions = (cartUpdate) => {
     return (
       cartUpdate && (
         <div>
@@ -71,13 +76,18 @@ const Card = ({
             <div className="input-group-prepend">
               <span className="input-group-text">Adjust Quantity</span>
             </div>
-            <input type="number" className="form-control" value={count} onChange={handleChange(product._id)} />
+            <input
+              type="number"
+              className="form-control"
+              value={count}
+              onChange={handleChange(product._id)}
+            />
           </div>
         </div>
       )
     );
   };
-  const showRemoveButton = showRemoveProductButton => {
+  const showRemoveButton = (showRemoveProductButton) => {
     return (
       showRemoveProductButton && (
         <button
@@ -85,7 +95,7 @@ const Card = ({
             removeItem(product._id);
             setRun(!run); // run useEffect in parent Cart
           }}
-          className="btn btn-outline-danger mt-2 mb-2"
+          className="btn btn-danger mainColor p-2 font-weight-bold rounded-lg mt-2 mb-3" style={{border:"none" ,width:"100%"}}
         >
           Remove Product
         </button>
@@ -93,21 +103,27 @@ const Card = ({
     );
   };
   return (
-    <div className="card ">
-      <div className="card-header card-header-1 ">{product.name}</div>
+    <div className="card" style={{textAlign: 'center',border:'4px solid  rgb(88, 4, 255)'}}>
+      <div className="card-header rounded-0 mainColor card-header-1 font-weight-bold" style={{fontSize:"1.5rem",textAlign:"center",minHeight:"95px"}}>{product.name.toUpperCase()}</div>
       <div className="card-body">
         {shouldRedirect(redirect)}
         <ShowImage item={product} url="product" />
-        <p className="card-p  mt-2">{product.description.substring(0, 100)} </p>
-        <p className="card-p black-10">$ {product.price}</p>
-        <p className="black-9">Category: {product.category && product.category.name}</p>
-        <p className="black-8">Added on {moment(product.createdAt).fromNow()}</p>
+        {/* <p className="card-p  mt-2">{product.description.substring(0, 30)} </p> */}
+        <p className="text-danger font-weight-bold" style={{fontSize:"1.5rem"}}>${product.price}</p>
+        <p className="mainText font-weight-bold" style={{fontSize:"1.5rem"}}>
+          {product.category && product.category.name.toUpperCase()}
+        </p>
+        <p className="mainText">
+          Added on {moment(product.createdAt).fromNow()}
+        </p>
         {showStock(product.quantity)}
         <br />
 
-        {showViewButton(showViewProductButton)}
+        <div className="row">
+          <div className="col-lg-6 col-md-12">{showViewButton(showViewProductButton)}</div>
 
-        {showAddToCartBtn(showAddToCartButton)}
+          <div className="col-lg-6 col-md-12">{showAddToCartBtn(showAddToCartButton)}</div>
+        </div>
 
         {showRemoveButton(showRemoveProductButton)}
 

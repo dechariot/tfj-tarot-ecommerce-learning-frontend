@@ -54,7 +54,7 @@ const CheckCount = ({ products }) => {
       <div>{showDropIn()}</div>
     ) : (
       <Link to="/signin">
-        <button className="btn btn-primary">Sign In</button>
+        <button className="btn mainColor rounded-pill font-weight-bold">Sign In</button>
       </Link>
     );
   };
@@ -122,7 +122,7 @@ const CheckCount = ({ products }) => {
       {data.clientToken !== null && products.length > 0 ? (
         <div>
           <div className="form-group mb-3">
-            <label className="text-muted">Delivery address:</label>
+            <label className="text-black font-weight-bold">Delivery address:</label>
             <textarea
               onChange={handleAddress}
               className="form-control"
@@ -166,7 +166,7 @@ const CheckCount = ({ products }) => {
 
   return (
     <div>
-      <h2>Total: ${getTotal()}</h2>
+      <h3 className="font-weight-bold text-right">Total: ${getTotal()}</h3>
       {showSuccess(data.success)}
       {showError(data.error)}
       {showCheckout()}
