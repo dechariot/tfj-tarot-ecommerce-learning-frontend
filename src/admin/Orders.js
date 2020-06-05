@@ -39,10 +39,10 @@ const Orders = () => {
   const showOrderLength = () => {
     if (orders.length > 0) {
       return (
-        <h2 className="text-primary display-2">Total order: {orders.length}</h2>
+        <h2 className="mainText display-4 font-weight-bold">Total order: {orders.length}</h2>
       );
     } else {
-      return <h2 className="text-danger">No Orders</h2>;
+      return <h2 className="text-danger font-weight-bold display-4">No Orders</h2>;
     }
   };
 
@@ -89,34 +89,34 @@ const Orders = () => {
       className="container"
     >
       <div className="row">
-        <div className="col-md-8 offset-md-2">
+        <div className="col-md-8 p-4 offset-md-2">
           {showOrderLength(orders)}
           {orders.map((o, oIndex) => {
             return (
               <div
                 key={oIndex}
                 className="mt-5"
-                style={{ borderBottom: "5px solid indigo" }}
+                style={{ border: "5px solid  rgb(88, 4, 255)" }}
               >
                 <h3 className="mb-5">
-                  <span className="bg-primary">Order ID: {o._id}</span>
+                  <span className="mainText font-weight-bold p-2">Orders ID: {o._id}</span>
                 </h3>
                 <ul className="list-group mb-2">
-                  <li className="list-group-item">Status: {showStatus(o)}</li>
-                  <li className="list-group-item">
+                  <li className="list-group-item font-weight-bold mainText">Status: {showStatus(o)}</li>
+                  <li className="list-group-item font-weight-bold mainText">
                     Transaction ID: {o.transaction_id}
                   </li>
-                  <li className="list-group-item">Amount: ${o.amount}</li>
-                  <li className="list-group-item">Order By {o.user.name}</li>
-                  <li className="list-group-item">
+                  <li className="list-group-item font-weight-bold mainText">Amount: ${o.amount}</li>
+                  <li className="list-group-item font-weight-bold mainText">Order By {o.user.name}</li>
+                  <li className="list-group-item font-weight-bold mainText">
                     Delivery Address: {o.address}
                   </li>
-                  <li className="list-group-item">
+                  <li className="list-group-item font-weight-bold mainText">
                     Order on {moment(o.createdAt).fromNow()}
                   </li>
                 </ul>
-                <h3 className="mt-4 mb-4">
-                  Total products in the order: {o.products.length}
+                <h3 className="mt-4 mb-4 font-weight-bold mainText">
+                  TOTAL PRODUCTS: {o.products.length}
                 </h3>
 
                 {o.products.map((p, pIndex) => {

@@ -115,22 +115,22 @@ const UpdateProduct = ({ match }) => {
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Name</label>
+                <label className="text-light">Name</label>
                 <input onChange={handleChange('name')} type="text" className="form-control" value={name} />
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Description</label>
+                <label className="text-light">Description</label>
                 <textarea onChange={handleChange('description')} className="form-control" value={description} />
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Price</label>
+                <label className="text-light">Price</label>
                 <input onChange={handleChange('price')} type="number" className="form-control" value={price} />
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Category</label>
+                <label className="text-light">Category</label>
                 <select onChange={handleChange('category')} className="form-control">
                     <option>Please select</option>
                     {categories &&
@@ -143,7 +143,7 @@ const UpdateProduct = ({ match }) => {
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Shipping</label>
+                <label className="text-light">Shipping</label>
                 <select onChange={handleChange('shipping')} className="form-control">
                     <option>Please select</option>
                     <option value="0">No</option>
@@ -152,11 +152,11 @@ const UpdateProduct = ({ match }) => {
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Quantity</label>
+                <label className="text-light">Quantity</label>
                 <input onChange={handleChange('quantity')} type="number" className="form-control" value={quantity} />
             </div>
 
-            <button className="btn btn-outline-primary">Update Product</button>
+            <button className="btn btn-light mainText font-weight-bold rounded-pill">Update Product</button>
         </form>
     );
 
@@ -190,7 +190,7 @@ const UpdateProduct = ({ match }) => {
     return (
         <Layout title="Add a new product" description={`Hello ${user.name}, ready to add a new product?`}>
             <div className="row">
-                <div className="col-md-8 offset-md-2">
+                <div className="col-md-8 offset-md-2 mainColor p-4">
                     {showLoading()}
                     {showSuccess()}
                     {showError()}

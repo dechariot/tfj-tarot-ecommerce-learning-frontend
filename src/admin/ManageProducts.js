@@ -41,19 +41,19 @@ const ManageProducts = () => {
         >
             <div className="row">
                 <div className="col-12">
-                    <h2 className="text-center">
-                        Total {products.length} products
+                    <h2 className="text-center mainText font-weight-bold">
+                        TOTAL {products.length} PRODUCTS
                     </h2>
                     <hr />
-                    <ul className="list-group">
+                    <ul className="list-group" style={{border:"4px solid  rgb(88, 4, 255)"}}>
                         {products.map((p, i) => (
                             <li
                                 key={i}
-                                className="list-group-item d-flex justify-content-between align-items-center"
+                                className="list-group-item d-flex justify-content-between mainText align-items-center"
                             >
-                                <strong>{p.name}</strong>
+                                <strong>{p.name.toUpperCase()}</strong>
                                 <Link to={`/admin/product/update/${p._id}`}>
-                                    <span className="badge badge-warning badge-pill">
+                                    <span className="badge font-weight-bold mainColor badge-pill">
                                         Update
                                     </span>
                                 </Link>

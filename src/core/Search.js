@@ -80,7 +80,7 @@ const Search = () => {
       <span className="input-group-text mainColor" style={{borderRadius:"30px"}} >
         <div className="input-group input-group-lg">
           <div className="input-group-prepend">
-            <select className="btn mr-2 font-weight-bold text-white mainColor" style={{borderRadius:"30px"}} onChange={handleChange("category")}>
+            <select className="btn mr-2 font-weight-bold mainText bg-light" style={{borderRadius:"30px"}} onChange={handleChange("category")}>
               <option  value="ALL">Pick Category</option>
               {categories.map((c, i) => (
                 <option key={i} value={c._id}>

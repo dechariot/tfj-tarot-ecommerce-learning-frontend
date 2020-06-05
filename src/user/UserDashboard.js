@@ -28,16 +28,16 @@ const DashBoard = () => {
 
   const userLinks = () => {
     return (
-      <div className="card mb-5">
-        <h4 className="card-header">User Links</h4>
-        <ul className="list-group">
+      <div className="card mb-5" style={{border:"4px solid  rgb(88, 4, 255)"}}>
+        <h4 className="card-header mainColor rounded-0 text-light font-weight-bold" >User Links</h4>
+        <ul className="list-group" style={{border:"none"}}>
           <li className="list-group-item">
-            <Link className="nav-link" to="/cart">
+            <Link className="nav-link mainText font-weight-bold" to="/cart">
               My Cart
             </Link>
           </li>
           <li className="list-group-item">
-            <Link className="nav-link" to={`/profile/${_id}`}>
+            <Link className="nav-link mainText font-weight-bold" to={`/profile/${_id}`}>
               Update Profile
             </Link>
           </li>
@@ -47,9 +47,9 @@ const DashBoard = () => {
   };
 
   const userInfo = () => (
-    <div className="card mb-5">
-      <h3 className="card-header">User Information</h3>
-      <ul className="list-group">
+    <div className="card mb-5" style={{border:"4px solid  rgb(88, 4, 255)"}}>
+      <h3 className="card-header mainColor rounded-0 text-light font-weight-bold">User Information</h3>
+      <ul className="list-group rounded-0">
         <li className="list-group-item">{name}</li>
         <li className="list-group-item">{email}</li>
         <li className="list-group-item">{role === 1 ? "Admin" : "Buyer"}</li>
@@ -58,9 +58,9 @@ const DashBoard = () => {
   );
 
   const purchaseHistory = (history) => (
-    <div className="card mb-5">
-      <h3 className="card-header">Purchase History</h3>
-      <ul className="list-group">
+    <div className="card mb-5" style={{border:"4px solid  rgb(88, 4, 255)"}}>
+      <h3 className="card-header mainColor text-light font-weight-bold">Purchase History</h3>
+      <ul className="list-group rounded-0">
         <li className="list-group-item">
           {history.map((h, i) => {
             return (
